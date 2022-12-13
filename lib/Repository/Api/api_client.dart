@@ -6,9 +6,9 @@ import 'package:http/http.dart';
 import 'api_exception.dart';
 
 class ApiClient {
-  static const String basePath = 'http://185.193.17.122/';
+  static const String basePath = 'http://ec2-3-143-158-60.us-east-2.compute.amazonaws.com/api//';
 
-  Future<Response> invokeApi(String path, String method, Object? body) async {
+  Future<Response> invokeApi({required String path,required String method,required Object? body}) async {
     Map<String, String> headerparams = {};
     if (method == 'POST' ||
         method == 'GET' ||
@@ -38,11 +38,9 @@ class ApiClient {
         );
         break;
       case "PUT":
-        print("Editing====================================");
         print(jsonEncode(body));
         response = await put(Uri.parse(url),
             headers: headerparams, body: jsonEncode(body));
-        print("Editing====================================");
         break;
       case "DELETE":
         response = await delete(Uri.parse(url), headers: nullableHeaderParams);
